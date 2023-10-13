@@ -17,6 +17,7 @@ namespace trs_web_service.Controllers
             _service = service;
         }
 
+        // User login
         [HttpPost("login")]
         public ActionResult LoginUser([FromBody] LoginDto loginDto)
         {
@@ -31,6 +32,7 @@ namespace trs_web_service.Controllers
             }
         }
 
+        // Forgot Password
         [HttpPost("forgot_password")]
         public ActionResult ForgotPasswordUser([FromBody] ForgotDto forgotDto)
         {

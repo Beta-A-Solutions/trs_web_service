@@ -17,6 +17,7 @@ namespace trs_web_service.Controllers
             _service = service;
         }
 
+        // Get All Train Schedules
         [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAllShedules()
@@ -32,6 +33,7 @@ namespace trs_web_service.Controllers
             }
         }
 
+        // Get Sdhedules for manage
         [Authorize(Policy = "nottraveler")]
         [HttpGet ("{trainRegNo}")]
         public async Task<IActionResult> GetAllShedulesForManaage(string trainRegNo)
@@ -47,6 +49,7 @@ namespace trs_web_service.Controllers
             }
         }
 
+        // Create Train Schedules
         [Authorize(Policy = "backoffice")]
         [HttpPost]
         public async Task<IActionResult> CreateShedule(TrainScheduleReqDto req)
