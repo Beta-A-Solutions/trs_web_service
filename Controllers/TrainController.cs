@@ -18,6 +18,7 @@ namespace trs_web_service.Controllers
             _trainService = service;
         }
 
+        // Create Train
         [Authorize(Policy = "backoffice")]
         [HttpPost]
         public async Task<IActionResult> Create(TrainReqBodyDto train)
@@ -34,6 +35,7 @@ namespace trs_web_service.Controllers
 
         }
 
+        //Get All Trains
         [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAllTrains()
@@ -49,6 +51,7 @@ namespace trs_web_service.Controllers
             }
         }
 
+        // Change status
         [Authorize(Policy = "backoffice")]
         [HttpPut ("changeActiveStatus/{regNo}")]
         public async Task<IActionResult> ChangeActiveStatus(string regNo)
@@ -64,6 +67,7 @@ namespace trs_web_service.Controllers
             }
         }
 
+        //Update Train
         [Authorize(Policy = "backoffice")]
         [HttpPut]
         public async Task<IActionResult> UpdateTrain(TrainReqBodyDto train)

@@ -13,23 +13,26 @@ namespace trs_web_service.Infrastructure
         {
             _collection = database.GetCollection<User>("Users");
         }
-
+        
+        // Get All Users
         public async Task<IEnumerable<User>> GetAllAsync()
         {
             return await _collection.Find(_ => true).ToListAsync();
         }
 
+        // Get User By NIC
         public async Task<User> GetByNICAsync(string nic)
         {
             return await _collection.Find(t => t.NIC == nic).FirstOrDefaultAsync();
         }
 
+        // get User By Id
         public async Task<User> GetByIdAsync(ObjectId id)
         {
             return await _collection.Find(t => t.Id == id).FirstOrDefaultAsync();
         }
 
-
+        //Deactivate User
         public async Task<User> DeactivateUserAsync(string nic)
         {
             var filter = Builders<User>.Filter.Eq(u => u.NIC, nic);
@@ -41,6 +44,7 @@ namespace trs_web_service.Infrastructure
             return updatedUser;
         }
 
+        // Send Acitivate Status
         public async Task<User> SendActiveStatusAsync(string nic)
         {
             var filter = Builders<User>.Filter.Eq(u => u.NIC, nic);
@@ -52,6 +56,7 @@ namespace trs_web_service.Infrastructure
             return updatedUser;
         }
 
+        // Activate User
         public async Task<User> ActivateUserAsync(string nic)
         {
             var filter = Builders<User>.Filter.Eq(u => u.NIC, nic);
@@ -63,6 +68,7 @@ namespace trs_web_service.Infrastructure
             return updatedUser;
         }
 
+        // Update User Profile
         public async Task<User> UserUpdateProfile(UserUpdateDto user, ObjectId id)
         {
             var filter = Builders<User>.Filter.Eq(u => u.Id, id);
@@ -77,6 +83,7 @@ namespace trs_web_service.Infrastructure
             return updatedUser;
         }
 
+        // Reset User Password
         public async Task<User> ResetPassword(string password, ObjectId id)
         {
             var filter = Builders<User>.Filter.Eq(u => u.Id, id);
@@ -89,6 +96,7 @@ namespace trs_web_service.Infrastructure
             return updatedUser;
         }
 
+        // Update User
         public async Task<User> UpdateUser(UpdateUserDto user)
         {
             var filter = Builders<User>.Filter.Eq(u => u.NIC, user.NIC);
@@ -111,6 +119,7 @@ namespace trs_web_service.Infrastructure
             return updatedUser;
         }
 
+        // Create User
         public async Task CreateAsync(User user)
         {
             await _collection.InsertOneAsync(user);

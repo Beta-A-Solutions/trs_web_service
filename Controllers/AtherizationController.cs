@@ -24,6 +24,7 @@ namespace trs_web_service.Controllers
             _userService = userService;
         }
 
+        // Get Info
         [Authorize]
         [HttpGet("info")]
         public async Task<IActionResult> GetMyInfo()
@@ -60,6 +61,7 @@ namespace trs_web_service.Controllers
             }
         }
 
+        //Update profile
         [Authorize]
         [HttpPut("update")]
         public async Task<IActionResult> UserUpdateProfile(UserUpdateDto user)
@@ -89,6 +91,7 @@ namespace trs_web_service.Controllers
             }
         }
 
+        //Reset Password
         [Authorize]
         [HttpPut("reset_password")]
         public async Task<IActionResult> ResetPassword(ResetPasswordDto password)

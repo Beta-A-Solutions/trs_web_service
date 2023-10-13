@@ -14,11 +14,13 @@ namespace trs_web_service.Infrastructure
             _collection = database.GetCollection<TrainSchedule>("TrainShedules");
         }
 
+        // Create Train Schedule
         public async Task CreateAsync(TrainSchedule schedule)
         {
             await _collection.InsertOneAsync(schedule);
         }
 
+        // Get Train Schedule by Reg No
         public async Task<List<TrainSchedule>> GetBySheduleByTrainRegistraionNoAsync(string regNo)
         {
             // Create a filter to find the schedule with the given train reg no
@@ -27,6 +29,7 @@ namespace trs_web_service.Infrastructure
             return await _collection.Find(filter).ToListAsync();
         }
 
+        // Get Train Schedule by Id Not Canceled
         public async Task<List<TrainSchedule>> GetBySheduleByTrainRegistraionNoAndNoCancelAsync(string regNo)
         {
             // Create a filter to find the schedule with the given train reg no
@@ -35,7 +38,7 @@ namespace trs_web_service.Infrastructure
             return await _collection.Find(filter).ToListAsync();
         }
 
-
+        // Get All Train schedules
         public async Task<List<TrainSchedule>> GetAllTrainShedulesAsync(string tRegNo)
         {
             // Create a filter to match documents where IsDelete is not true and IsCancel not true
@@ -45,6 +48,7 @@ namespace trs_web_service.Infrastructure
             return await _collection.Find(filter).ToListAsync();
         }
 
+        //Get All train Schedules for travelers
         public async Task<List<TrainSchedule>> GetAllTrainShedulesForTravelersAsync()
         {
             // Create a filter to match documents where IsDelete is not true and IsCancel not true
@@ -54,6 +58,7 @@ namespace trs_web_service.Infrastructure
             return await _collection.Find(filter).ToListAsync();
         }
 
+        //Get All Train Schedules By Id
         public async Task<List<TrainSchedule>> GetAllByIdAsync(ObjectId id)
         {
             // Create a filter to match documents where IsDelete is not true and IsCancel not true
@@ -63,6 +68,7 @@ namespace trs_web_service.Infrastructure
             return await _collection.Find(filter).ToListAsync();
         }
 
+        //Update Train Schedules
         public async Task<TrainSchedule> UpdateTrainSchedule(ObjectId id, TrainScheduleReqDto schedule)
         {
                 var filter = Builders<TrainSchedule>.Filter.Eq(u => u.Id, id);
@@ -83,6 +89,7 @@ namespace trs_web_service.Infrastructure
                 return updated;
             }
 
+        //Delete Train Schedules
         public async Task DeleteTrainSchedule(ObjectId id)
         {
             var filter = Builders<TrainSchedule>.Filter.Eq(u => u.Id, id);
@@ -93,6 +100,7 @@ namespace trs_web_service.Infrastructure
             await _collection.FindOneAndUpdateAsync(filter, update);
         }
 
+        // Cancel Train Schedules
         public async Task CancelShedule(ObjectId id)
         {
             var filter = Builders<TrainSchedule>.Filter.Eq(u => u.Id, id);
@@ -103,6 +111,7 @@ namespace trs_web_service.Infrastructure
             await _collection.FindOneAndUpdateAsync(filter, update);
         }
 
+        // Cancel Train Schedules by Train Reg No
         public async Task CancelSheduleByTrainRegNo(string regNo)
         {
             var filter = Builders<TrainSchedule>.Filter.Eq(u => u.TraingRegistraionNo, regNo);

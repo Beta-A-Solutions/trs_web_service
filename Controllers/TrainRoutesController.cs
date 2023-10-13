@@ -17,6 +17,7 @@ namespace trs_web_service.Controllers
             _service = service;
         }
 
+        // Get Train Routes
         [Authorize (Policy ="nottraveler")]
         [HttpGet]
         public async Task<IActionResult> GetAllRoutes()
@@ -32,6 +33,7 @@ namespace trs_web_service.Controllers
             }
         }
 
+        // Get All Routes Not in Active
         [Authorize]
         [HttpGet ("getActiveRoutes")]
         public async Task<IActionResult> GetAllRoutesByNotInActive()
@@ -47,6 +49,7 @@ namespace trs_web_service.Controllers
             }
         }
 
+        // Create Train Routes
         [Authorize (Policy = "backoffice")]
         [HttpPost]
         public async Task<IActionResult> CreateRoute(TrainRouteReqDto req)
@@ -62,6 +65,7 @@ namespace trs_web_service.Controllers
             }
         }
 
+        // Delete Train Routes
         [Authorize(Policy = "backoffice")]
         [HttpPut ("deleteRoute/{id}")]
         public async Task<IActionResult> DeleteRoute(string id)
@@ -77,6 +81,7 @@ namespace trs_web_service.Controllers
             }
         }
 
+        // Disable Routes
         [Authorize(Policy = "backoffice")]
         [HttpPut("disableRoute/{id}")]
         public async Task<IActionResult> DisableRoute(string id)
@@ -92,7 +97,7 @@ namespace trs_web_service.Controllers
             }
         }
 
-
+        // Enable Routes
         [Authorize(Policy = "backoffice")]
         [HttpPut("enableRoute/{id}")]
         public async Task<IActionResult> EnableRoute(string id)
@@ -108,7 +113,7 @@ namespace trs_web_service.Controllers
             }
         }
 
-
+        //Update Routes
         [Authorize(Policy = "backoffice")]
         [HttpPut("updateRoute/{id}")]
         public async Task<IActionResult> UpdateRoute(string id, TrainRouteReqDto req)

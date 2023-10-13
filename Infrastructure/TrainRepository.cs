@@ -13,12 +13,13 @@ namespace trs_web_service.Infrastructure
         {
             _collection = database.GetCollection<Train>("Trains");
         }
-
+        // Create Train
         public async Task CreateAsync(Train train)
         {
             await _collection.InsertOneAsync(train);
         }
 
+        //Get train by Reg No
         public async Task<Train> GetByRegistraionNoAsync(string regNo)
         {
             // Create a filter to find the route with the given start and end stations
@@ -31,6 +32,7 @@ namespace trs_web_service.Infrastructure
             return train;
         }
 
+        // Change Status
         public async Task<Train> ChangeActiveStatus(string regNo, bool isActive)
         {
             var filter = Builders<Train>.Filter.Eq(t => t.RegistraionNo, regNo);
@@ -42,7 +44,7 @@ namespace trs_web_service.Infrastructure
             return updatedUser;
         }
 
-
+        // Get All Trains
         public async Task<List<Train>> GetAllTrainsAsync()
         {
             // Create a filter to match documents where IsDelete is not true
@@ -61,6 +63,7 @@ namespace trs_web_service.Infrastructure
             return await _collection.Find(filter).ToListAsync();
         }
 
+        //Update Trains
         public async Task<Train> UpdateTrain(TrainReqBodyDto train)
         {
             var filter = Builders<Train>.Filter.Eq(u => u.RegistraionNo, train.RegistraionNo);
@@ -74,6 +77,7 @@ namespace trs_web_service.Infrastructure
             return updated;
         }
 
+        //Delete Trains
         public async Task DeleteTrain(ObjectId id)
         {
             var filter = Builders<Train>.Filter.Eq(u => u.Id, id);

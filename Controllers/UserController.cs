@@ -23,7 +23,7 @@ namespace trs_web_service.Controllers
             _userService = userService;
         }
 
-
+        // Get All Users
         [Authorize (Policy= "nottraveler")]
         [HttpGet]
         public async Task<IActionResult> GetAllUsers()
@@ -38,6 +38,7 @@ namespace trs_web_service.Controllers
             }
         }
 
+        // get User By NIC
         [Authorize(Policy = "nottraveler")]
         [HttpGet("{nic}")]
         public async Task<IActionResult> GetUserByNIC(string nic)
@@ -58,6 +59,7 @@ namespace trs_web_service.Controllers
          
         }
 
+        // Create User
         [Authorize(Policy = "nottraveler")]
         [HttpPost ("create_user")]
         public async Task<IActionResult> CreateUser(UserRegisterDto user)
@@ -74,7 +76,7 @@ namespace trs_web_service.Controllers
 
         }
 
-
+        //Register
         [HttpPost]
         public async Task<IActionResult> Register(UserRegisterDto user)
         {
@@ -90,6 +92,7 @@ namespace trs_web_service.Controllers
             
         }
 
+        //Deactivate User
         [Authorize]
         [HttpPut ("deactivate/{nic}")]
         public async Task<IActionResult> DeactivateUser(string nic)
@@ -106,6 +109,7 @@ namespace trs_web_service.Controllers
           
         }
 
+        // Request Activate User
         [Authorize]
         [HttpPut("request_active_account/{nic}")]
         public async Task<IActionResult> RequestActiveAccount(string nic)
@@ -122,6 +126,7 @@ namespace trs_web_service.Controllers
 
         }
 
+        // activate User
         [Authorize(Policy= "backoffice")]
         [HttpPut("activate/{nic}")]
         public async Task<IActionResult> ActivateUser(string nic)
@@ -138,6 +143,7 @@ namespace trs_web_service.Controllers
 
         }
 
+        //Update User
         [Authorize(Policy = "backoffice")]
         [HttpPut("update_user")]
         public async Task<IActionResult> UserUpdate(UpdateUserDto user)
