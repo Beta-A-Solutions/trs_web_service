@@ -14,11 +14,13 @@ namespace trs_web_service.Infrastructure
             _collection = database.GetCollection<TrainRoutes>("TrainRoutes");
         }
 
+        // Creat Train Routes
         public async Task CreateAsync(TrainRoutes route)
         {
             await _collection.InsertOneAsync(route);
         }
 
+        //Get All Train Routes
         public async Task<List<TrainRoutes>> GetAllTrainRoutesAsync()
         {
             // Create a filter to match documents where IsDelete is not true
@@ -28,6 +30,7 @@ namespace trs_web_service.Infrastructure
             return await _collection.Find(filter).ToListAsync();
         }
 
+        // Get All train Not in Active Status
         public async Task<List<TrainRoutes>> GetAllTrainRoutesByNotInActiveAsync()
         {
             // Create a filter to match documents where IsDelete is not true
@@ -37,7 +40,7 @@ namespace trs_web_service.Infrastructure
             return await _collection.Find(filter).ToListAsync();
         }
 
-
+        // Disable train Routes
         public async Task DisableRoute(ObjectId id)
         {
             var filter = Builders<TrainRoutes>.Filter.Eq(u => u.Id, id);
@@ -48,6 +51,7 @@ namespace trs_web_service.Infrastructure
             await _collection.FindOneAndUpdateAsync(filter, update);
         }
 
+        // Enable Train Routes
         public async Task EnableRoute(ObjectId id)
         {
             var filter = Builders<TrainRoutes>.Filter.Eq(u => u.Id, id);
@@ -58,6 +62,7 @@ namespace trs_web_service.Infrastructure
             await _collection.FindOneAndUpdateAsync(filter, update);
         }
 
+        // Delete Train Routes
         public async Task DeleteRoute(ObjectId id)
         {
             var filter = Builders<TrainRoutes>.Filter.Eq(u => u.Id, id);
@@ -68,6 +73,7 @@ namespace trs_web_service.Infrastructure
             await _collection.FindOneAndUpdateAsync(filter, update);
         }
 
+        //Get Train By Start Start Station And End station
         public async Task<TrainRoutes> GetRouteByStartAndEnd(string start, string end)
         {          
             // Create a filter to find the route with the given start and end stations
@@ -81,6 +87,7 @@ namespace trs_web_service.Infrastructure
             return route;
         }
 
+        //Get Trains by Id
         public async Task<TrainRoutes> GetById(ObjectId id)
         {
             // Create a filter to find the route with the given start and end stations
@@ -93,6 +100,7 @@ namespace trs_web_service.Infrastructure
             return route;
         }
 
+        // Update Train Routes
         public async Task UpdateRoute(TrainRoutes trainRoutes)
         {
             var filter = Builders<TrainRoutes>.Filter.Eq(t => t.Id, trainRoutes.Id);
